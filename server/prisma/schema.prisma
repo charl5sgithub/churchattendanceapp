@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Member {
+  id        Int          @id @default(autoincrement())
+  name      String
+  phone     String?
+  email     String?
+  family    String?
+  joinDate  DateTime
+  attendance Attendance[]
+}
+
+model Attendance {
+  id        Int      @id @default(autoincrement())
+  member    Member   @relation(fields: [memberId], references: [id])
+  memberId  Int
+  date      DateTime
+  status    AttendanceStatus
+
+  @@unique([memberId, date])
+}
+
+enum AttendanceStatus {
+  PRESENT
+  ABSENT
+}
