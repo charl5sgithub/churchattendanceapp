@@ -6,13 +6,6 @@ interface Member {
   name: string;
 }
 
-interface SummaryItem {
-  name: string;
-  presentDays: number;
-  absentDays: number;
-  percentage: number;
-}
-
 export function DashboardPage() {
   const [totalMembers, setTotalMembers] = useState(0);
   const [todayPresent, setTodayPresent] = useState(0);
